@@ -12,10 +12,11 @@ import mysql.connector
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary #We import this so we can specify the Firefox browser binary location
 import os
 
-FF_options = webdriver.FirefoxOptions()
-FF_profile = webdriver.FirefoxProfile()
-FF_options.add_argument("-headless")
-FF_profile.update_preferences()
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
 
 def insert_varibles_into_table(heading, image, state_name, table_heading, pincode):
     try:
@@ -52,7 +53,8 @@ for x in f:
 	# webdriver.Chrome() will be used
 
 	# driver = webdriver.Firefox(executable_path = 'geckodriver')
-	driver = webdriver.Firefox(options=FF_options, firefox_profile=FF_profile, executable_path=os.environ.get("GECKODRIVER_PATH"), firefox_binary=FirefoxBinary(os.environ.get("FIREFOX_BIN")))
+	driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
 
 	#URL of the website 
 	

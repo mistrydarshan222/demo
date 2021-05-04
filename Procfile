@@ -1,1 +1,1 @@
-beweb: gunicorn script.py
+wbeweb: gunicorn script.py
